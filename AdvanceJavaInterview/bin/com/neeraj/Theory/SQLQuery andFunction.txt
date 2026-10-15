@@ -1,0 +1,174 @@
+                 MYSQL SQL QUERY NOTES
+============================================================
+1. INSERT QUERY
+------------------------------------------------------------
+INSERT INTO employee
+VALUES (1, 'Rahul', 'TCS', 25000);
+
+------------------------------------------------------------
+2. UPDATE QUERY
+------------------------------------------------------------
+UPDATE employee
+SET salary = 30000
+WHERE id = 1;
+
+------------------------------------------------------------
+3. DELETE QUERY
+------------------------------------------------------------
+DELETE FROM employee
+WHERE id = 1;
+
+
+4. SEARCH QUERY
+------------------------------------------------------------
+SELECT *
+FROM employee
+WHERE id = 1;
+
+-----------------------------------------------------------
+5. LAST LOGIN QUERY
+-----------------------------------------------------------
+SELECT *
+FROM user
+ORDER BY last_login DESC
+LIMIT 1;
+
+-----------------------------------------------------------
+6. FOREIGN KEY
+-----------------------------------------------------------
+FOREIGN KEY (deptId) REFERENCES department(id);
+
+-----------------------------------------------------------
+7. SECOND HIGHEST SALARY
+-----------------------------------------------------------
+SELECT MAX(salary)
+FROM employee
+WHERE salary < (
+    SELECT MAX(salary)
+    FROM employee
+);
+
+-----------------------------------------------------------
+8. INNER JOIN / EQUI JOIN
+-----------------------------------------------------------
+SELECT *
+FROM employee
+INNER JOIN department
+ON employee.deptId = department.id;
+
+-----------------------------------------------------------
+9. LEFT OUTER JOIN
+-----------------------------------------------------------
+SELECT *
+FROM employee
+LEFT JOIN department
+ON employee.deptId = department.id;
+
+-----------------------------------------------------------
+10. RIGHT OUTER JOIN
+-----------------------------------------------------------
+SELECT *
+FROM employee
+RIGHT JOIN department
+ON employee.deptId = department.id;
+
+----------------------------------------------------------
+11. FULL OUTER JOIN (USING UNION IN MYSQL)
+----------------------------------------------------------
+SELECT *
+FROM employee
+LEFT JOIN department
+ON employee.deptId = department.id
+
+UNION
+
+SELECT *
+FROM employee
+RIGHT JOIN department
+ON employee.deptId = department.id;
+
+-----------------------------------------------------------
+12. ONLY UNMATCHED RECORDS
+-----------------------------------------------------------
+SELECT *
+FROM employee
+LEFT JOIN department
+ON employee.deptId = department.id
+WHERE department.id IS NULL
+
+UNION
+
+SELECT *
+FROM employee
+RIGHT JOIN department
+ON employee.deptId = department.id
+WHERE employee.id IS NULL;
+
+-----------------------------------------------------------
+13. STORED PROCEDURE - IN
+-----------------------------------------------------------
+DELIMITER //
+
+CREATE PROCEDURE empIn(IN empId INT)
+BEGIN
+    SELECT id, name, company, salary
+    FROM employee
+    WHERE id = empId;
+END //
+
+DELIMITER ;
+
+CALL empIn(2);
+
+
+14. STORED PROCEDURE - INOUT
+-----------------------------------------------------------
+DELIMITER //
+
+CREATE PROCEDURE empInOut(INOUT empId INT)
+BEGIN
+    SELECT salary INTO empId
+    FROM employee
+    WHERE id = empId;
+END //
+
+DELIMITER ;
+-----------------------------------------------------------
+15. STORED PROCEDURE - OUT (SQUARE)
+-----------------------------------------------------------
+DELIMITER //
+
+CREATE PROCEDURE squareProc(
+    IN num INT,
+    OUT result INT
+)
+BEGIN
+    SET result = num * num;
+END //
+
+DELIMITER ;
+------------------------------------------------------------
+16. STORED FUNCTION - SQUARE
+------------------------------------------------------------
+DELIMITER //
+
+CREATE FUNCTION squareNum(num INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    RETURN num * num;
+END //
+
+DELIMITER ;
+
+============================================================
+                      END OF NOTES
+============================================================
+
+NOTE:
+- These queries assume that the relevant tables and columns exist.
+- The INSERT examples must match the actual table structure.
+- MySQL does not directly support FULL OUTER JOIN; UNION combines
+  the LEFT JOIN and RIGHT JOIN results.
+- Run CREATE PROCEDURE / CREATE FUNCTION only once unless you
+  first drop the existing routine or use a suitable replacement
