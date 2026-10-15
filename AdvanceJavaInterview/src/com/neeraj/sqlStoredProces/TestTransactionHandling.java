@@ -4,60 +4,38 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 
-
 public class TestTransactionHandling {
 
 	public static void main(String[] args) {
-
+		add();
 	}
 
 	public static void add() {
-
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-
 		try {
-
 			Class.forName("com.mysql.cj.jdbc.Driver");
 
-			conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb", "root", "root");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/mydb1", "root", "root");
 
-			conn.setAutoCommit(false);
+			conn.setAutoCommit(false); // Transaction start
 
-			pstmt = conn.prepareStatement("INSERT INTO transaction(name, salary) VALUES(?, ?)");
+			PreparedStatement pstmt = conn.prepareStatement("INSERT INTO employee(name, salary) VALUES(?, ?)");
 
 			pstmt.setString(1, "parth");
 			pstmt.setInt(2, 50000);
 
 			pstmt.executeUpdate();
 
-			conn.commit();
+			conn.commit(); // Changes permanently save
 
 			System.out.println("Transaction Committed Successfully");
 
+			pstmt.close();
+			conn.close();
+
 		} catch (Exception e) {
-
-			try {
-				if (conn != null) {
-					conn.rollback();
-					System.out.println("Transaction Rolled Back");
-				}
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-
-		} finally {
-
-			try {
-				if (pstmt != null)
-					pstmt.close();
-
-				if (conn != null)
-					conn.close();
-
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			System.out.println("Transaction Failed");
+			e.printStackTrace();
 		}
 	}
+
 }
