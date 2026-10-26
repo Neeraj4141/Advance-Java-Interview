@@ -163,3 +163,14 @@ Q. Exception handle in mysql.
 A. 1. MySql - Declare Handler   Declare Continue    Declare Exit.
    2. Oracle - Use Exception Block
    3. MySql Server - Try Catch block
+
+
+1. Normalization: Sir, User table mein humne roleId store kiya hai
+   aur us ID ke through Role table se roleName fetch kiya hai.
+   Isse role ka naam baar-baar User table mein store nahi karna padta 
+   aur data duplication kam hota hai.
+
+2. Denormalization: Sir, maan lo Timetable table mein collegeId,
+   studentId aur studentName teeno store kar rahe hain,
+   jabki student ka naam Student table mein pehle se hai. 
+   Isse same data repeat hota hai, aur ye denormalization ka example hai.
