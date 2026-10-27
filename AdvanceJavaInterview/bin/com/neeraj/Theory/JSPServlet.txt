@@ -1,0 +1,96 @@
+                                               Servlet bana ke tarike
+
+1. Mapping karke — web.xml
+
+Step 1: Servlet class banao.
+
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+public class MyServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req,HttpServletResponse res) throws IOException {
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
+        out.println("Hello From Servlet");
+    }
+}
+
+Step 2: web.xml mein mapping karo.
+
+
+<servlet>
+    <servlet-name>MyServlet</servlet-name>
+    <servlet-class>MyServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>MyServlet</servlet-name>
+    <url-pattern>/MyServlet</url-pattern>
+</servlet-mapping>
+
+
+ANS = HTTPServlet ko extends kiya fir web.xml me mapping ki 
+
+======================================================================================================
+
+2. Annotation ka use karke — @WebServlet
+Servlet class mein hi URL mapping kar dete hain.
+import java.io.*;
+import javax.servlet.*;
+import javax.servlet.http.*;
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/MyServlet")
+public class MyServlet extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req,
+                         HttpServletResponse res)
+            throws IOException {
+
+        res.setContentType("text/html");
+        PrintWriter out = res.getWriter();
+        out.println("Hello From Servlet");
+    }
+}
+
+
+Annotation ka use karte hee to web.xml me mapping ki jarurat nahi hoti hee 
+
+=======================================================================================================
+
+                                          error page kese banate hee 
+
+
+. JSP page directive se Error Page banana
+
+           Step 1: error.jsp banao.
+
+<%@ page isErrorPage="true" %>
+
+<html>
+<body>
+    <h1>Something went wrong!</h1>
+    <h3>Error: ${pageContext.exception.message}</h3>
+</body>
+</html>
+
+          
+            Step 2: web.xml mein configuration likho.
+<error-page>
+    <exception-type>java.lang.Exception</exception-type>
+    <location>/error.jsp</location>
+</error-page>
+
+<error-page>
+    <error-code>404</error-code>
+    <location>/404.jsp</location>
+</error-page>
+
+
+iserror page ko true kiay or web.xml me mapping ki 
+
+=====================================================================================================
