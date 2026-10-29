@@ -64,8 +64,13 @@ Q. Where do you find concrete classes of Statement and Prepared Statement?
 A. Java.SQL Package.
 
 Q. What is a Data connection pool?
-A. DCP is a pool of connection. It is created at the application startUp.    OR
-   Application is concurrently accessed by multiple users to access and manipulate database record.
+A.  Data Connection Pool is a pool of connections. It is created at the application startup. Ideally, one DCP is created for one Database. If your application has multiple Databases then multiple DCP will be created, one for each Database.
+
+The advantages of DCP are: 
+
+1 = Once a Connection is created it will not be destroyed. When a user closes the connection it will not be really closed it will come back to the DCP.
+    The same connection will be allocated next user who requests the database connection.
+2 = Since a Connection can be shared by multiple users so it will save connection creation and destruction time.
 
 Q. What are the advantages of a database connection pool?
 A. 1. High Performance. 2. It controls number of connection created. 3. It allows application to handle more concurrent users.
@@ -75,7 +80,7 @@ Q. What is a Database connection pool? How do you configure database connection 
 A. Configure DCP "datasource" tag in web.xml.
 
 Q. If an application is connected with 4 databases then how many database connection pools are expected?
-A. 
+A. 4
 
 Q. How JDBC is following Bridge Design Pattern? How did you create NBPK in your application?
 A. Because JDBC is a set of interface like Connection, ResultSet, Statement etc.
@@ -164,13 +169,3 @@ A. 1. MySql - Declare Handler   Declare Continue    Declare Exit.
    2. Oracle - Use Exception Block
    3. MySql Server - Try Catch block
 
-
-1. Normalization: Sir, User table mein humne roleId store kiya hai
-   aur us ID ke through Role table se roleName fetch kiya hai.
-   Isse role ka naam baar-baar User table mein store nahi karna padta 
-   aur data duplication kam hota hai.
-
-2. Denormalization: Sir, maan lo Timetable table mein collegeId,
-   studentId aur studentName teeno store kar rahe hain,
-   jabki student ka naam Student table mein pehle se hai. 
-   Isse same data repeat hota hai, aur ye denormalization ka example hai.
