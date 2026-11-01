@@ -1,0 +1,27 @@
+Q1. Why HTTP is called a stateless protocol?
+
+Ans: Because HTTP does not remember the user's state. Every request is treated as a new and independent request.
+
+Q2. What is Servlet/JSP Lifecycle?
+
+Ans: Servlet/JSP Lifecycle is the process of creating, executing and destroying a Servlet/JSP.
+
+Q3. Why do you use JSP and Servlets in an application?
+
+Ans: JSP and Servlets are server-side technologies used to develop dynamic web applications using Java.
+
+Q4. Why do you use Servlets as Controller?
+
+Ans: Because Servlets handle client requests, process them and control the application flow.
+
+Q5. Why do you use JSP as View?
+
+Ans: Because JSP is used to display dynamic data to the user.
+
+Q6. How many instances of a Servlet/JSP are created for handling multiple user requests?
+
+Ans: Only one instance is created for a Servlet, and a separate thread is created for each request to execute the service method.
+
+Q7. Can you define Servlet instance/static/class attributes or variables? Is it advisable to define Servlet's instance/static/class attributes or variables?
+
+Ans: Yes, we can define instance and static variables in a Servlet, but it is not advisable because multiple threads share these variables, which can cause thread-safety issues. We should prefer local variables.
