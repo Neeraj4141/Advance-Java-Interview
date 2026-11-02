@@ -1,23 +1,22 @@
 package com.neeraj.junit.user;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-
 import org.junit.Test;
 
-public class UserUpdate {
+import junit.framework.TestCase;
+
+public class UserUpdate extends TestCase {
 
 	@Test
-	public void update() throws Exception {
+	public void testUpdate() throws Exception {
 
 		UserBean bean = UserModel.findByPk(1);
 
-		assertNotNull("User should not be null", bean);
-
-		bean.setFirst_name("kapil");
+		bean.setFirst_name("aaa");
 
 		UserModel.update(bean);
 
-		assertEquals("kapil", bean.getFirst_name());
+		bean = UserModel.findByPk(1);
+
+		assertEquals("aaa", bean.getFirst_name());
 	}
 }

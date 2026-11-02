@@ -13,7 +13,7 @@ public class UserModel {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "shruti5");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "root");
 
 		PreparedStatement ps = conn.prepareStatement("select max(id) from st_user");
 
@@ -34,7 +34,7 @@ public class UserModel {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "shruti5");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "root");
 
 		PreparedStatement ps = conn.prepareStatement("select * from st_user where id = ?");
 
@@ -64,7 +64,7 @@ public class UserModel {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "shruti5");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "root");
 
 		PreparedStatement ps = conn.prepareStatement("select * from st_user where login = ?");
 
@@ -93,7 +93,7 @@ public class UserModel {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "shruti5");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "root");
 
 		PreparedStatement ps = conn.prepareStatement("insert into st_user (id, first_name, login) values (?, ?, ?)");
 
@@ -113,7 +113,7 @@ public class UserModel {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "shruti5");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "root");
 
 		PreparedStatement ps = conn.prepareStatement("update st_user set first_name = ?, login = ? where id = ?");
 
@@ -133,7 +133,7 @@ public class UserModel {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "shruti5");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/project04", "root", "root");
 
 		PreparedStatement ps = conn.prepareStatement("delete from st_user where id = ?");
 

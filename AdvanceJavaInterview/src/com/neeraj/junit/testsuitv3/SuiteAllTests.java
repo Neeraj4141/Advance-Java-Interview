@@ -1,6 +1,7 @@
 package com.neeraj.junit.testsuitv3;
 
 import junit.framework.TestSuite;
+import junit.textui.TestRunner;
 
 public class SuiteAllTests {
 
@@ -11,7 +12,7 @@ public class SuiteAllTests {
 		sui.addTestSuite(SuiteTest1.class);
 		sui.addTestSuite(SuiteTest2.class);
 
-		junit.textui.TestRunner.run(sui);
+		TestRunner.run(sui);
 	}
 	
 	/*
